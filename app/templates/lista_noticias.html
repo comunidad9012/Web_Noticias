@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block css%}
+
+{% endblock %}
+{% block content %}
+<div>
+    <h1>Noticias</h1>
+    <div class="news-list">
+        {% for noticia in noticias %}
+        <div class="news-item">
+            <h2><a href="{{ url_for('noticia_bp.verNoticia', id=noticia.id) }}">{{ noticia.titulo }}</a></h2>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {{ pagination.links }}
+    </div>
+</div>
+{% endblock %}

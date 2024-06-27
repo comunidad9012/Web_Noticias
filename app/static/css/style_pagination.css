@@ -1,0 +1,39 @@
+/*Contenedor de la paginacion*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+    background-color: black;
+}
+/*Separacion de contender de cada item*/
+.pagination .page-item {
+    margin: 0 5px;
+}
+/*Visor de mensaje current. Casi se me revienta la cabeza de tanto código backend para eliminarlo*/
+/*Al final me cansé y lo quité con el css jaja*/
+.sr-only{
+    display: none;
+}
+.pagination .page-item .page-link {
+    padding: 8px 12px;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    text-decoration: none;
+    display: block;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    border: 1px solid #dee2e6;
+    background-color: #e9ecef;
+}

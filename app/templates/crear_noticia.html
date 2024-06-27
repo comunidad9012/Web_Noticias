@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Crear Noticia</h1>
+
+<form method="post" enctype="multipart/form-data" action="{{ url_for('crearNoticia_bp.crearNoticia') }}">
+    {{ form.hidden_tag() }}
+
+    <div style="margin-bottom: 20px;">
+        {{ form.titulo.label }} 
+        {{ form.titulo(style='width: 100%; padding: 10px; border: 2px solid #ccc; border-radius: 5px; box-sizing: border-box;') }}
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        {{ form.descripcion.label }} 
+        {{ form.descripcion(style='width: 100%; padding: 10px; border: 2px solid #ccc; border-radius: 5px; box-sizing: border-box;')}}
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        {{ form.categoria.label }} 
+        {{ form.categoria(style='width: 100%; padding: 10px; border: 2px solid #ccc; border-radius: 5px; box-sizing: border-box;') }}
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        {{ form.contenido.label }} 
+        {{ form.contenido(rows=10, style='width: 100%; padding: 10px; border: 2px solid #ccc; border-radius: 5px; box-sizing: border-box;') }}
+    </div>
+
+    <div>
+        {{ form.submit(style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;") }}
+    </div>
+</form>
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='contenido') }}
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('contenido', {
+        filebrowserImageUploadUrl: '{{ url_for("upload_bp.upload_file") }}',
+        filebrowserUploadMethod: 'form'
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_base_light.css') }}" id="theme_style">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_pagination.css') }}">
+    <script>
+        const url_for_light = "{{ url_for('static', filename='css/style_base_light.css') }}";
+        const url_for_dark = "{{ url_for('static', filename='css/style_base_dark.css') }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/change_theme.js') }}"></script>
+    <title>WebNotice</title>
+    {% block css %}
+        <!--En esta sección es donde  en los templates hijos  pondrán sus css particular de cada archivo,-->
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <ul class="navbar_list">
+                <li><a href="{{ url_for('home_bp.home') }}" class="navbar_list_link" >Home</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('auth_bp.logout') }}" class="navbar_list_link" >Cerrar Sesión</a></li>
+                    <li><a href="{{ url_for('crearNoticia_bp.crearNoticia') }}" class="navbar_list_link" >Crear Noticia</a></li>
+                    <li><a href="{{ url_for('listadoNoticias_bp.listadoNoticias') }}" class="navbar_list_link" >Noticias</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('auth_bp.login') }}" class="navbar_list_link" >Log in</a></li>
+                    <li><a href="{{ url_for('signup_bp.signup') }}" class="navbar_list_link" >Sign up</a></li>
+                {% endif %}
+                <button onclick="toggleTheme()" id="theme_button" class="icon_nav_theme">
+                    <img src="{{ url_for('static', filename='icons/lightmode.svg') }}" alt="mode light" class="pic_mode" id="light_icon"> 
+                    <img src="{{ url_for('static', filename='icons/darkmode.svg') }}" alt="mode dark" class="pic_mode" id="dark_icon" style="display: none;">
+                </button>
+                <style>
+                    .pic_mode{
+                        width: 30px;
+                    }
+                </style>
+
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="container">
+          {% block content %}
+          {% endblock %}  
+        </div>
+    </main>
+    <footer></footer>
+    
+</body>
+</html>
